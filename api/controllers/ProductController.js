@@ -1,4 +1,5 @@
 const ProductModel = require('../models/ProductModel');
+const check = require('../status/statusCheck.js');
 
 class ProductController {
     async findAll(req, res){
@@ -34,10 +35,7 @@ class ProductController {
                 "price_with_discount"
             ]});
         
-        if(product == null){
-            return res.status(404).json();
-        }
-        return res.status(200).json(product);
+        return check.status200(res, product);
 
     }
 
@@ -52,19 +50,23 @@ class ProductController {
     async update(req, res){
         const id = req.params.id;
         const body = req.body;
+        let product = await ProductModel.findByPk(id);
 
         await ProductModel.update(body, { where: {id} });
 
-        return res.status(204).json();
+        return check.status204(res, product);
+
 
     }
 
     async delete(req, res){
         const id = req.params.id;
+        let product = await ProductModel.findByPk(id);
 
         await ProductModel.destroy({ where: {id} });
         
-        return res.status(204).json();
+        return check.status204(res, product);
+
     }
 
 }
