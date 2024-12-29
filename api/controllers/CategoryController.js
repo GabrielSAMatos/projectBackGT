@@ -25,7 +25,7 @@ class CategoryController {
                 "use_in_menu"
             ]});
 
-        check.status200(res, category);
+        return check.status200(res, category);
 
     }
 
@@ -40,21 +40,23 @@ class CategoryController {
     async upate(req, res){
         const id = req.params.id;
         const body = req.body;
+        let category = await CategoryModel.findByPk(id);
+
         await CategoryModel.update(body, { where: {id} });
         
         //Para pegar o conteudo de dentro do ID e jogar na funcao para checar se ha algo ou nao
-        let category = await CategoryModel.findByPk(id);
-        check.status204(res, category);
+        return check.status204(res, category);
 
     }
 
     async delete(req, res){
         const id = req.params.id;
+        let category = await CategoryModel.findByPk(id);
+
         await CategoryModel.destroy({ where: {id} });
         
         //Para pegar o conteudo de dentro do ID e jogar na funcao para checar se ha algo ou nao
-        let category = await CategoryModel.findByPk(id);
-        check.status204(res, category);
+        return check.status204(res, category);
     }
 
 }
