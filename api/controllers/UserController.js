@@ -37,7 +37,7 @@ class UserController {
         });
     };
 
-    async upate(req, res){
+    async update(req, res){
         const id = req.params.id;
         const body = req.body;
         let user = await UserModel.findByPk(id);

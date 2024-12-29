@@ -8,7 +8,7 @@ categoryController = new categoryController();
 CategoryRoutes.get('/categorys', categoryController.findAll);
 CategoryRoutes.get('/category/:id', categoryController.findById);
 CategoryRoutes.post('/category', categoryController.create);
-CategoryRoutes.put('/category/:id', categoryController.upate);
+CategoryRoutes.put('/category/:id', categoryController.update);
 CategoryRoutes.delete('/category/:id', categoryController.delete);
 
 module.exports = CategoryRoutes;
