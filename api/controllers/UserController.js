@@ -4,11 +4,12 @@ class UserController {
     async findAll(req, res){
         let data = await UserModel.findAll({
             attributes: [
+                "id",
                 "firstname", 
                 "surname", 
                 "email"
-            ]
-        });
+            ]});
+
         return res.status(200).json(data);
     }
 
@@ -16,8 +17,17 @@ class UserController {
 
         let id = req.params.id;
 
-        let user = await UserModel.findByPk(id, {attributes: ["firstname", "surname", "email"]});
+        let user = await UserModel.findByPk(id, {attributes: [
+            "id",
+            "firstname", 
+            "surname", 
+            "email"
+        ]});
 
+        if(product == null){
+            return res.status(404).json();
+        }
+        
         return res.status(200).json(user);
 
     }
