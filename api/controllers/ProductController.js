@@ -50,7 +50,7 @@ class ProductController {
 
         await ProductModel.destroy({ where: {id} });
         
-        return res.status(200).json({
+        return res.status(204).json({
             message: "Produto deletado com sucesso!"
         })
     }
