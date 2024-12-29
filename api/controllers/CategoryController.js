@@ -1,10 +1,15 @@
 const CategoryModel = require('../models/CategoryModel');
+const check = require('../status/statusCheck.js');
 
 class CategoryController {
     async findAll(req, res){
         let data = await CategoryModel.findAll({
-            attributes: ["name", "slug"]
-        });
+            attributes: [
+                "id",
+                "name", 
+                "slug",
+                "use_in_menu"
+            ]});
         return res.status(200).json(data);
     }
 
@@ -12,9 +17,15 @@ class CategoryController {
 
         let id = req.params.id;
 
-        let category = await CategoryModel.findByPk(id, {attributes: ["name", "slug"]});
+        let category = await CategoryModel.findByPk(id, {
+            attributes: [
+                "id",
+                "name", 
+                "slug",
+                "use_in_menu"
+            ]});
 
-        return res.status(200).json(category);
+        check.status200(res, category);
 
     }
 
@@ -29,19 +40,21 @@ class CategoryController {
     async upate(req, res){
         const id = req.params.id;
         const body = req.body;
-
         await CategoryModel.update(body, { where: {id} });
-
-        return res.status(204).json();
+        
+        //Para pegar o conteudo de dentro do ID e jogar na funcao para checar se ha algo ou nao
+        let category = await CategoryModel.findByPk(id);
+        check.status204(res, category);
 
     }
 
     async delete(req, res){
         const id = req.params.id;
-
         await CategoryModel.destroy({ where: {id} });
         
-        return res.status(204).json();
+        //Para pegar o conteudo de dentro do ID e jogar na funcao para checar se ha algo ou nao
+        let category = await CategoryModel.findByPk(id);
+        check.status204(res, category);
     }
 
 }
