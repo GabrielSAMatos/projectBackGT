@@ -39,9 +39,7 @@ class ProductController {
 
         await ProductModel.update(body, { where: {id} });
 
-        return res.status(200).json({
-            message: "Produto alterado com sucesso!"
-        });
+        return res.status(204).json();
 
     }
 
@@ -50,9 +48,7 @@ class ProductController {
 
         await ProductModel.destroy({ where: {id} });
         
-        return res.status(204).json({
-            message: "Produto deletado com sucesso!"
-        })
+        return res.status(204).json();
     }
 
 }

@@ -36,9 +36,7 @@ class UserController {
 
         await UserModel.update(body, { where: {id} });
 
-        return res.status(200).json({
-            message: "Usuario alterado com sucesso!"
-        });
+        return res.status(204).json();
 
     }
 
@@ -46,10 +44,8 @@ class UserController {
         const id = req.params.id;
 
         await UserModel.destroy({ where: {id} });
-        
-        return res.status(204).json({
-            message: "Usuario deletado com sucesso!"
-        })
+
+        return res.status(204).json();
     }
 
 }

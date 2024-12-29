@@ -32,9 +32,7 @@ class CategoryController {
 
         await CategoryModel.update(body, { where: {id} });
 
-        return res.status(200).json({
-            message: "Categoria alterada com sucesso!"
-        });
+        return res.status(204).json();
 
     }
 
@@ -43,9 +41,7 @@ class CategoryController {
 
         await CategoryModel.destroy({ where: {id} });
         
-        return res.status(204).json({
-            message: "Categoria deletada com sucesso!"
-        })
+        return res.status(204).json();
     }
 
 }
