@@ -2,7 +2,9 @@ const CategoryModel = require('../models/CategoryModel');
 
 class CategoryController {
     async findAll(req, res){
-        let data = await CategoryModel.findAll();
+        let data = await CategoryModel.findAll({
+            attributes: ["name", "slug"]
+        });
         return res.status(200).json(data);
     }
 
