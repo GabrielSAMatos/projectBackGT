@@ -3,7 +3,7 @@ const connection = require('../config/connection');
 
 class ProductModel extends Model {
     static associate({ImgProductModel}){
-        ProductModel.hasOne(ImgProductModel, {foreignKey: "product_id"})
+        ProductModel.hasMany(ImgProductModel, {foreignKey: "product_id"})
     }
 };
 

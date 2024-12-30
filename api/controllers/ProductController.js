@@ -9,22 +9,23 @@ class ProductController {
     }
 
     async findAll(req, res){
-        // let data = await ProductModel.findAll({
-
-        //     attributes: [
-        //         "id",
-        //         "enabled",
-        //         "name",
-        //         "slug",
-        //         "stock",
-        //         "description", 
-        //         "price",
-        //         "price_with_discount"
-        // ]});
         const products = await ProductModel.findAll({
-            include: ImgProductModel
+            attributes: [
+                "id",
+                "enabled",
+                "name",
+                "slug",
+                "stock",
+                "description", 
+                "price",
+                "price_with_discount"
+            ],
+            include: [
+                {
+                    model: ImgProductModel
+                }
+            ]
         });
-        console.log(products);
         
         return res.status(200).json(products);
     }
