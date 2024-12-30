@@ -1,9 +1,9 @@
 const express = require('express');
+const ProductController = require('../controllers/ProductController');
 const ProductRoutes = express.Router();
 
-let productController = require('../controllers/ProductController.js');
 
-productController = new productController();
+const productController = new ProductController();
 
 ProductRoutes.get('/products', productController.findAll);
 ProductRoutes.get('/product/:id', productController.findById);

@@ -1,9 +1,9 @@
 const express = require('express');
 const UserRoutes = express.Router();
 
-let userController = require('../controllers/UserController.js');
+const UserController = require('../controllers/UserController.js');
 
-userController = new userController();
+const userController = new UserController();
 
 UserRoutes.get('/users', userController.findAll);
 UserRoutes.get('/user/:id', userController.findById);
