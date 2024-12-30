@@ -1,13 +1,20 @@
 const ProductModel = require('../models/ProductModel');
 const ImgProductModel = require('../models/ImgProductModel.js');
 const OptionsModel = require('../models/OptionsModel.js');
+const Product_CategoryModel = require('../models/Product_CategoryModel.js');
+const CategoryModel = require('../models/CategoryModel.js');
 
 const check = require('../status/statusCheck.js');
 
 class ProductController {
 
     constructor(){
-        ProductModel.associate({ImgProductModel, OptionsModel})
+        ProductModel.associate({
+            ImgProductModel, 
+            OptionsModel,
+            Product_CategoryModel,
+            CategoryModel
+        })
     }
 
     async findAll(req, res){
@@ -24,6 +31,8 @@ class ProductController {
             ],
             include: [
                 {
+                    model: CategoryModel,
+                },{
                     model: ImgProductModel 
                 },{
                     model: OptionsModel
@@ -55,13 +64,24 @@ class ProductController {
     }
 
     async create(req, res){
-        const body = req.body;
-        
-        await ProductModel.create(body, {include: [{model: ImgProductModel}, {model: OptionsModel}]});
-        res.status(201).json({
+
+        const {category_ids, ...body} = req.body;
+
+        let product = await ProductModel.create(body, {
+            include: {
+                through: Product_CategoryModel,
+                model: CategoryModel,
+                model: ImgProductModel,
+                model: OptionsModel,
+
+        }});
+
+        product.setCategory_ids(category_ids)
+
+        return res.status(201).json({
             message: "Produto criado com sucesso!"
         });
-    }
+    };
 
     async update(req, res){
         const id = req.params.id;
@@ -73,7 +93,7 @@ class ProductController {
         return check.status204(res, product);
 
 
-    }
+    };
 
     async delete(req, res){
         const id = req.params.id;
@@ -83,8 +103,8 @@ class ProductController {
         
         return check.status204(res, product);
 
-    }
+    };
 
-}
+};
 
 module.exports = ProductController;
