@@ -1,7 +1,7 @@
 const request = require('supertest');
 const express = require('express');
 
-// Corrigir o caminho do controlador para o correto, sem 'src/'
+
 const CategoryRoutes = require('../api/routes/CategoryRoutes'); // Caminho para as rotas
 const app = express();
 

@@ -5,7 +5,7 @@ const connection = new Sequelize({
     database: "pbgt", // projeto backend geracao tech
     host: "localhost",
     username: "root",
-    password: "root",
+    password: "1234",
     port: 3306
 });
 
