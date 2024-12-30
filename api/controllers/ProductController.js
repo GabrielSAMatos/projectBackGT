@@ -1,22 +1,32 @@
 const ProductModel = require('../models/ProductModel');
+const ImgProductModel = require('../models/ImgProductModel.js');
 const check = require('../status/statusCheck.js');
 
 class ProductController {
+
+    constructor(){
+        ProductModel.associate({ImgProductModel})
+    }
+
     async findAll(req, res){
-        let data = await ProductModel.findAll({
+        // let data = await ProductModel.findAll({
 
-            attributes: [
-                "id",
-                "enabled",
-                "name",
-                "slug",
-                "stock",
-                "description", 
-                "price",
-                "price_with_discount"
-        ]});
-
-        return res.status(200).json(data);
+        //     attributes: [
+        //         "id",
+        //         "enabled",
+        //         "name",
+        //         "slug",
+        //         "stock",
+        //         "description", 
+        //         "price",
+        //         "price_with_discount"
+        // ]});
+        const products = await ProductModel.findAll({
+            include: ImgProductModel
+        });
+        console.log(products);
+        
+        return res.status(200).json(products);
     }
 
     async findById(req, res){
@@ -40,8 +50,9 @@ class ProductController {
     }
 
     async create(req, res){
-        let body = req.body;
-        await ProductModel.create(body);
+        const body = req.body;
+        
+        await ProductModel.create(body, {include: ImgProductModel});
         res.status(201).json({
             message: "Produto criado com sucesso!"
         });

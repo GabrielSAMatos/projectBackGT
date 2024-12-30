@@ -1,7 +1,11 @@
 const { DataTypes, Model } = require('sequelize');
 const connection = require('../config/connection');
 
-class ProductModel extends Model {}
+class ProductModel extends Model {
+    static associate({ImgProductModel}){
+        ProductModel.hasOne(ImgProductModel, {foreignKey: "product_id"})
+    }
+};
 
 ProductModel.init(
   {
