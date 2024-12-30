@@ -4,6 +4,8 @@ const CategoryRoutes = require('./CategoryRoutes');
 const UserRoutes = require('./UserRoutes');
 const ProductRoutes = require('./ProductRoutes');
 const ImgProductRoutes = require('./ImgProductRoutes');
+const OptionsRoutes = require('./OptionsRoutes');
+
 
 
 
@@ -30,6 +32,8 @@ PrivateRoutes.use(CategoryRoutes);
 PrivateRoutes.use(UserRoutes);
 PrivateRoutes.use(ProductRoutes);
 PrivateRoutes.use(ImgProductRoutes);
+PrivateRoutes.use(OptionsRoutes);
+
 
 
 
