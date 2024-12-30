@@ -5,7 +5,7 @@ class ProductModel extends Model {}
 
 ProductModel.init(
   {
-    enable: {
+    enabled: {
         type: DataTypes.BOOLEAN,
         defaultValue: false
     },
@@ -25,8 +25,9 @@ ProductModel.init(
         type: DataTypes.INTEGER,
         defaultValue: 0
     },
-    decription: {
-        type: DataTypes.STRING
+    description: {
+        type: DataTypes.STRING,
+        defaultValue: ''
     },
     price: {
         type: DataTypes.FLOAT,

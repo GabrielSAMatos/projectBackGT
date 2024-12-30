@@ -1,15 +1,21 @@
 const ProductModel = require('../models/ProductModel');
+const check = require('../status/statusCheck.js');
 
 class ProductController {
     async findAll(req, res){
-        let data = await ProductModel.findAll(//{
-        //     attributes: [
-        //         "firstname", 
-        //         "surname", 
-        //         "email"
-        //     ]
-        // }
-    );
+        let data = await ProductModel.findAll({
+
+            attributes: [
+                "id",
+                "enabled",
+                "name",
+                "slug",
+                "stock",
+                "description", 
+                "price",
+                "price_with_discount"
+        ]});
+
         return res.status(200).json(data);
     }
 
@@ -17,11 +23,19 @@ class ProductController {
 
         let id = req.params.id;
 
-        let product = await ProductModel.findByPk(id//, 
-           // {attributes: ["firstname", "surname", "email"]}
-        );
-
-        return res.status(200).json(product);
+        let product = await ProductModel.findByPk(id, {
+            attributes: [
+                "id",
+                "enabled",
+                "name",
+                "slug",
+                "stock",
+                "description", 
+                "price",
+                "price_with_discount"
+            ]});
+        
+        return check.status200(res, product);
 
     }
 
@@ -33,22 +47,26 @@ class ProductController {
         });
     }
 
-    async upate(req, res){
+    async update(req, res){
         const id = req.params.id;
         const body = req.body;
+        let product = await ProductModel.findByPk(id);
 
         await ProductModel.update(body, { where: {id} });
 
-        return res.status(204).json();
+        return check.status204(res, product);
+
 
     }
 
     async delete(req, res){
         const id = req.params.id;
+        let product = await ProductModel.findByPk(id);
 
         await ProductModel.destroy({ where: {id} });
         
-        return res.status(204).json();
+        return check.status204(res, product);
+
     }
 
 }

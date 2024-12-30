@@ -1,6 +1,8 @@
 const connection = require('../config/connection');
 
 require('../models/CategoryModel');
+require('../models/ProductModel');
+require('../models/UserModel');
 
 
-connection.sync({alter:true})
+connection.sync({force:true});
