@@ -7,7 +7,7 @@ class images extends Model {};
 images.init(
   {  
     product_id: {
-        type: DataTypes.INTEGER(1),
+        type: DataTypes.INTEGER,
         allowNull: false,
         references: {
             model: ProductModel,
@@ -25,7 +25,6 @@ images.init(
 
   },
   {
-    tableName: 'images',
     timestamps: false,
     sequelize: connection, 
   },
