@@ -1,9 +1,9 @@
 const { DataTypes, Model } = require('sequelize');
 const connection = require('../config/connection');
 
-class CategoryModel extends Model {}
+class category_ids extends Model {}
 
-CategoryModel.init(
+category_ids.init(
   {
     name: {
         type: DataTypes.STRING,
@@ -20,10 +20,10 @@ CategoryModel.init(
   },
   {
     sequelize: connection,     
-    tableName: 'Category',   
+    tableName: 'category_ids',   
     timestamps: true
 },
 );
 
 
-module.exports = CategoryModel;
+module.exports = category_ids;
