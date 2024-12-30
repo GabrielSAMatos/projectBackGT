@@ -1,11 +1,13 @@
 const ProductModel = require('../models/ProductModel');
 const ImgProductModel = require('../models/ImgProductModel.js');
+const OptionsModel = require('../models/OptionsModel.js');
+
 const check = require('../status/statusCheck.js');
 
 class ProductController {
 
     constructor(){
-        ProductModel.associate({ImgProductModel})
+        ProductModel.associate({ImgProductModel, OptionsModel})
     }
 
     async findAll(req, res){
@@ -22,7 +24,9 @@ class ProductController {
             ],
             include: [
                 {
-                    model: ImgProductModel
+                    model: ImgProductModel 
+                },{
+                    model: OptionsModel
                 }
             ]
         });
@@ -53,7 +57,7 @@ class ProductController {
     async create(req, res){
         const body = req.body;
         
-        await ProductModel.create(body, {include: ImgProductModel});
+        await ProductModel.create(body, {include: [{model: ImgProductModel}, {model: OptionsModel}]});
         res.status(201).json({
             message: "Produto criado com sucesso!"
         });

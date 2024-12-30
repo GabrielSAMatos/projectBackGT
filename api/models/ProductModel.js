@@ -2,8 +2,9 @@ const { DataTypes, Model } = require('sequelize');
 const connection = require('../config/connection');
 
 class ProductModel extends Model {
-    static associate({ImgProductModel}){
-        ProductModel.hasMany(ImgProductModel, {foreignKey: "product_id"})
+    static associate({ImgProductModel, OptionsModel}){
+        ProductModel.hasMany(ImgProductModel, {foreignKey: "product_id"});
+        ProductModel.hasMany(OptionsModel, {foreignKey: "product_id"})
     }
 };
 
