@@ -5,8 +5,8 @@ const UserRoutes = require('./UserRoutes');
 const ProductRoutes = require('./ProductRoutes');
 const ImgProductRoutes = require('./ImgProductRoutes');
 const OptionsRoutes = require('./OptionsRoutes');
-
-
+const PublicRoutes = require('./PublicRoutes');
+const AuthRoutes = require('./AuthRoutes');
 
 
 require('dotenv').config();
@@ -15,7 +15,6 @@ require('dotenv').config();
 const PrivateRoutes = express.Router();
 
 PrivateRoutes.use((req, res, next) => {
-    return next();
 
     const token = req.headers.token;
     try{
@@ -33,6 +32,8 @@ PrivateRoutes.use(UserRoutes);
 PrivateRoutes.use(ProductRoutes);
 PrivateRoutes.use(ImgProductRoutes);
 PrivateRoutes.use(OptionsRoutes);
+PrivateRoutes.use(PublicRoutes);
+PrivateRoutes.use(AuthRoutes);
 
 
 
